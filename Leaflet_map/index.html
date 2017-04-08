@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<head>
+	<title>Leaflet Map</title>
+	
+	<!-- Leaflet lib files -->
+	
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css"/>
+	<script src="lib/leaflet/leaflet.js"></script>
+	
+	<!-- Map Data -->
+	
+	<script src="data/countries.geojson"></script>
+	
+	<!-- Map visible area css style -->
+	<style>
+		#map{height:600px;}
+		.legend{background:white;line-height:1.5em}
+		.legend i{width:3em;float:left;}
+	</style>
+</head>
+<body>
+	<h1>Map</h1>
+	<div id="map"></div>
+	<script>
+		<!-- Highlight Country layer style -->
+		var countriesLayer;
+		function highlightFeature(e){
+			var layer=e.target;
+			layer.setStyle(
+				{	weight:5,
+					color:'black',
+					fillColor:'white',
+					fillOpacity:0.2
+				}
+			);
+			if(L.Browser.ie && !L.Browser.opera){
+				layer.bringToFront();
+			  }
+			}
+			
+			function resetHighlight(e){
+			  countriesLayer.resetStyle(e.target);			
+			}
+			
+			function zoomToFeature(e){
+			   map.fitBounds(e.target.getBounds());
+			}
+			
+			function countriesOnEachFeature(feature,layer){
+				layer.on(
+				{
+					mouseover:highlightFeature,
+					mouseout:resetHighlight,
+					click:zoomToFeature
+				}
+				);
+			}
+		
+		<!-- Based on Population country color -->
+		function getCountryColor(popEst){
+			if(popEst>100000000)
+			{
+				return 'red';
+				}else if(popEst>10000000)
+				{
+					return 'green';
+				}else if(popEst>1000000)
+				{
+					return 'blue';
+				}else{
+					return 'yellow';
+				}
+			}
+			
+		<!-- Country style props. -->	
+		function countriesStyle(feature){
+			return{
+				fillColor:getCountryColor(feature.properties.pop_est),
+				weight:2,
+				opacity:1,
+				color:'white',
+				dashArray:3,
+				fillOpcity:0.7
+				}
+			}
+			
+		<!-- Map -->
+		var map=L.map('map').setView([43.84, 18.13], 4);
+		countriesLayer = L.geoJson(
+		countries,
+		{
+			style:countriesStyle,
+			onEachFeature:countriesOnEachFeature
+		}
+		).addTo(map);
+		
+		<!-- Legend -->
+		var legend=L.control({position:'bottomright'});
+		legend.onAdd=function(map){
+			var div=L.DomUtil.create('div','legend');
+			var labels=[
+			"Population greater than 100000000",
+			"Population greater than 10000000",
+			"Population greater than 1000000",
+			"Population equal or less than 1000000",
+			];
+			var grades=[100000001,10000001,1000001,1000000];
+			div.innerHTML='<div><b>Legend</b></div>';
+			for(var i=0;i<grades.length;i++){
+				div.innerHTML+='<i style="background:'+getCountryColor(grades[i])+'">&nbsp;&nbsp;</i>&nbsp;&nbsp;'+labels[i]+'<br/>';
+			}
+			return div;
+		}
+		legend.addTo(map);	
+		
+		<!-- Markers -->
+		
+		<!-- Default marker -->
+		var point=[43.866667,18.416667];
+		var marker=L.marker(point).addTo(map);		
+		
+		<!-- Marker with popup -->
+		var point=[41.866667,16.416667];		
+		var marker=L.marker(point).addTo(map);
+		marker.bindPopup(
+			'<b>welcome</b><div><img style="width:100%" src="images/area.jpg" alt="image"/> </div>',
+			{minWidth:256}
+		);
+		<!-- Circle marker -->
+		var point=[40.866667,20.416667];
+		var circle=L.circle(
+		point,
+		1000,
+		{
+			color:'purple',
+			fillColor:'red',
+			fillOpacity:0.8,
+		}
+		).addTo(map);
+		
+		<!-- Custom marker -->	
+		var point=[42.866667,20.416667];
+		var greenIcon=L.icon(
+		{
+			iconUrl:'lib/leaflet/images/leaf-green.png',
+			shadowUrl:'lib/leaflet/images/leaf-shadow.png',
+			iconSize:[38,95],
+			shadowSize:[50,64],
+			iconAnchor:[22,94],
+			shadowAnchor:[4,62],
+			popupAnchor:[-3,-76]
+			
+		}
+		);
+		var marker=L.marker(point,{icon:greenIcon}).addTo(map);
+	
+/*		 
+		 var LeafIcon = L.Icon.extend({
+    options: {
+        shadowUrl: 'lib/leaflet/images/leaf-shadow.png',
+        iconSize:     [38, 95],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+    }
+    
+    var greenIcon = new LeafIcon({iconUrl: 'lib/leaflet/images/leaf-green.png'}),
+    redIcon = new LeafIcon({iconUrl: 'lib/leaflet/images/leaf-red.png'}),
+    orangeIcon = new LeafIcon({iconUrl: 'lib/leaflet/images/leaf-orange.png'});
+    
+    L.icon = function (options) {
+    return new L.Icon(options);
+};
+
+L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map).bindPopup("I am a green leaf.");
+L.marker([51.495, -0.083], {icon: redIcon}).addTo(map).bindPopup("I am a red leaf.");
+L.marker([51.49, -0.1], {icon: orangeIcon}).addTo(map).bindPopup("I am an orange leaf.");
+});	
+
+*/
+	</script>
+	
+</body>
+</html>
+

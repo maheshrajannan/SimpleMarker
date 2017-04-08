@@ -1,60 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Simple markers</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
-
-      function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
-        var myLatLng1 = {lat: -24, lng: 130};
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 6,
-          center: myLatLng
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Hello World!'
-        });
-
-        var marker = new google.maps.Marker({
-            position: myLatLng1,
-            map: map,
-            title: 'Hello World!'
-          });
-
-
-      }
-    </script>
-    <!--
-    TODO:Store the key "YOUR_API_KEY" external to this html file.
-    This is for tomorrow (same time) chat.
-    find a way to get the "YOUR_API_KEY" from javascript function.
-  --><!-- using function
-
-<script>
-
-function googlemapapikey(){
 
 
 window.google = window.google || {};
@@ -75,7 +18,7 @@ google.maps = google.maps || {};
   
   google.maps.Load = function(apiLoad) {
     delete google.maps.Load;
-    apiLoad([0.009999999776482582,[null,[["https://khms0.googleapis.com/kh?v=718\u0026hl=en-US\u0026","https://khms1.googleapis.com/kh?v=718\u0026hl=en-US\u0026"],null,null,null,1,"718",["https://khms0.google.com/kh?v=718\u0026hl=en-US\u0026","https://khms1.google.com/kh?v=718\u0026hl=en-US\u0026"]],null,null,null,null,[["https://cbks0.googleapis.com/cbk?","https://cbks1.googleapis.com/cbk?"]],[["https://khms0.googleapis.com/kh?v=103\u0026hl=en-US\u0026","https://khms1.googleapis.com/kh?v=103\u0026hl=en-US\u0026"],null,null,null,null,"103",["https://khms0.google.com/kh?v=103\u0026hl=en-US\u0026","https://khms1.google.com/kh?v=103\u0026hl=en-US\u0026"]],[["https://mts0.googleapis.com/mapslt?hl=en-US\u0026","https://mts1.googleapis.com/mapslt?hl=en-US\u0026"]],null,null,null,[["https://mts0.googleapis.com/mapslt?hl=en-US\u0026","https://mts1.googleapis.com/mapslt?hl=en-US\u0026"]]],["en-US","US",null,0,null,null,"https://maps.gstatic.com/mapfiles/","https://csi.gstatic.com","https://maps.googleapis.com","https://maps.googleapis.com",null,"https://maps.google.com","https://gg.google.com","https://maps.gstatic.com/maps-api-v3/api/images/","https://www.google.com/maps",0,"https://www.google.com"],["https://maps.googleapis.com/maps-api-v3/api/js/28/5","3.28.5"],[3605483407],1,null,null,null,null,null,"initMap",null,null,1,"https://khms.googleapis.com/mz?v=718\u0026","AIzaSyBkf5clzH2TR1AwzmFzTQo9ZAOs_RQ7jsI","https://earthbuilder.googleapis.com","https://earthbuilder.googleapis.com",null,"https://mts.googleapis.com/maps/vt/icon",[["https://maps.googleapis.com/maps/vt"],["https://maps.googleapis.com/maps/vt"],null,null,null,null,null,null,null,null,null,null,["https://www.google.com/maps/vt"],"/maps/vt",375000000,375],2,500,[null,null,null,null,"https://www.google.com/maps/preview/log204","","https://static.panoramio.com.storage.googleapis.com/photos/",["https://geo0.ggpht.com/cbk","https://geo1.ggpht.com/cbk","https://geo2.ggpht.com/cbk","https://geo3.ggpht.com/cbk"],"https://maps.googleapis.com/maps/api/js/GeoPhotoService.GetMetadata","https://maps.googleapis.com/maps/api/js/GeoPhotoService.SingleImageSearch",["https://lh3.ggpht.com/","https://lh4.ggpht.com/","https://lh5.ggpht.com/","https://lh6.ggpht.com/"]],["https://www.google.com/maps/api/js/master?pb=!1m2!1u28!2s5!2sen-US!3sUS!4s28/5","https://www.google.com/maps/api/js/widget?pb=!1m2!1u28!2s5!2sen-US"],null,0,null,"/maps/api/js/ApplicationService.GetEntityDetails",0,null,null,[null,null,null,null,null,null,null,null,null,[0,0]],null,[],["28.5"]], loadScriptTime);
+    apiLoad([0.009999999776482582,[null,[["https://khms0.googleapis.com/kh?v=718\u0026hl=en-US\u0026","https://khms1.googleapis.com/kh?v=718\u0026hl=en-US\u0026"],null,null,null,1,"718",["https://khms0.google.com/kh?v=718\u0026hl=en-US\u0026","https://khms1.google.com/kh?v=718\u0026hl=en-US\u0026"]],null,null,null,null,[["https://cbks0.googleapis.com/cbk?","https://cbks1.googleapis.com/cbk?"]],[["https://khms0.googleapis.com/kh?v=103\u0026hl=en-US\u0026","https://khms1.googleapis.com/kh?v=103\u0026hl=en-US\u0026"],null,null,null,null,"103",["https://khms0.google.com/kh?v=103\u0026hl=en-US\u0026","https://khms1.google.com/kh?v=103\u0026hl=en-US\u0026"]],[["https://mts0.googleapis.com/mapslt?hl=en-US\u0026","https://mts1.googleapis.com/mapslt?hl=en-US\u0026"]],null,null,null,[["https://mts0.googleapis.com/mapslt?hl=en-US\u0026","https://mts1.googleapis.com/mapslt?hl=en-US\u0026"]]],["en-US","US",null,0,null,null,"https://maps.gstatic.com/mapfiles/","https://csi.gstatic.com","https://maps.googleapis.com","https://maps.googleapis.com",null,"https://maps.google.com","https://gg.google.com","https://maps.gstatic.com/maps-api-v3/api/images/","https://www.google.com/maps",0,"https://www.google.com"],["https://maps.googleapis.com/maps-api-v3/api/js/28/5","3.28.5"],[3605483407],1,null,null,null,null,null,"initMap",null,null,1,"https://khms.googleapis.com/mz?v=718\u0026","googlemapapikey();","https://earthbuilder.googleapis.com","https://earthbuilder.googleapis.com",null,"https://mts.googleapis.com/maps/vt/icon",[["https://maps.googleapis.com/maps/vt"],["https://maps.googleapis.com/maps/vt"],null,null,null,null,null,null,null,null,null,null,["https://www.google.com/maps/vt"],"/maps/vt",375000000,375],2,500,[null,null,null,null,"https://www.google.com/maps/preview/log204","","https://static.panoramio.com.storage.googleapis.com/photos/",["https://geo0.ggpht.com/cbk","https://geo1.ggpht.com/cbk","https://geo2.ggpht.com/cbk","https://geo3.ggpht.com/cbk"],"https://maps.googleapis.com/maps/api/js/GeoPhotoService.GetMetadata","https://maps.googleapis.com/maps/api/js/GeoPhotoService.SingleImageSearch",["https://lh3.ggpht.com/","https://lh4.ggpht.com/","https://lh5.ggpht.com/","https://lh6.ggpht.com/"]],["https://www.google.com/maps/api/js/master?pb=!1m2!1u28!2s5!2sen-US!3sUS!4s28/5","https://www.google.com/maps/api/js/widget?pb=!1m2!1u28!2s5!2sen-US"],null,0,null,"/maps/api/js/ApplicationService.GetEntityDetails",0,null,null,[null,null,null,null,null,null,null,null,null,[0,0]],null,[],["28.5"]], loadScriptTime);
   };
   var loadScriptTime = (new Date).getTime();
 })();
@@ -195,25 +138,3 @@ NOT_FOUND:_.fa,ZERO_RESULTS:_.ka},ElevationService:cf,ElevationStatus:{OK:_.ga,U
 KmlLayerStatus:_.Ui,MaxZoomService:Bg,MaxZoomStatus:{OK:_.ga,ERROR:_.aa},SaveWidget:_.Zg,StreetViewCoverageLayer:Gg,StreetViewPanorama:cg,StreetViewService:_.Hg,StreetViewStatus:{OK:_.ga,UNKNOWN_ERROR:_.ja,ZERO_RESULTS:_.ka},StyledMapType:_.Yg,TrafficLayer:hf,TrafficModel:_.Oi,TransitLayer:jf,TransitMode:_.Pi,TransitRoutePreference:_.Qi,TravelMode:_.Ni,UnitSystem:_.Mi});_.bb(Pe,{Feature:_.Zc,Geometry:Jc,GeometryCollection:_.pe,LineString:_.re,LinearRing:_.ve,MultiLineString:_.te,MultiPoint:_.ue,MultiPolygon:_.ze,Point:_.Lc,Polygon:_.xe});_.Xc("main",{});var bh=/'/g,ch;var Ae=arguments[0];
 window.google.maps.Load(function(a,b){var c=window.google.maps;gh();var d=hh(c);_.Q=new Bf(a);_.nj=Math.random()<_.M(_.Q,0,1);_.oj=Math.round(1E15*Math.random()).toString(36);_.zg=dh();_.Ti=eh();_.Zi=new _.wd;_.Sf=b;for(a=0;a<_.ee(_.Q,8);++a)_.xg[_.de(_.Q,8,a)]=!0;a=new _.zf(_.Q.data[3]);Be(_.N(a,0));_.ab(mj,function(a,b){c[a]=b});c.version=_.N(a,1);window.setTimeout(function(){Yc(["util","stats"],function(a,b){a.f.b();a.j();d&&b.b.b({ev:"api_alreadyloaded",client:_.N(_.Q,6),key:_.N(_.Q,16)})})},
 5E3);_.x.Rm();Uf=new Tf;(a=_.N(_.Q,11))&&Yc(_.ce(_.Q,12),fh(a),!0)});}).call(this,{});
-
-
-}
-</script> 
-
-
-<script>
-
-googlemapapikey();
-</script>
-
--->
-<script>
-function googlemapapikey(){
-return 'AIzaSyBtD8Dza1HZT5AwyJJH_9ZN2I0Y5QWl31o'
-}
-</script>
-
-
-  <script src="script.js"></script>
-  </body>
-</html>
