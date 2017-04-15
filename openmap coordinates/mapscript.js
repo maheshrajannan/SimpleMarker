@@ -12,6 +12,7 @@ function addMapPicker() {
 
 
 var marker = L.marker(mapCenter,{draggable: true}).addTo(mymap);
+
     function updateMarker(lat, lng) {
         marker
             .setLatLng([lat, lng])
@@ -20,12 +21,15 @@ var marker = L.marker(mapCenter,{draggable: true}).addTo(mymap);
           return false;
     };
     
+    //TODO: declare a function say mapClick and put the function here.
     mymap.on('click', function(e) {
         $('#latInput').val(e.latlng.lat);
         $('#lngInput').val(e.latlng.lng);
         updateMarker(e.latlng.lat, e.latlng.lng);
     });
 
+    //TODO: declare a function say mapDragEnd and put the function here.
+    //TODO: you can put these 2 functions mapDragEnd and mapClick , in to a class called mapActionListnere.
    marker.on('dragend', function (e) {
 
   document.getElementById('latInput').value = marker.getLatLng().lat;
