@@ -13,24 +13,30 @@ function addMapPicker() {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
 
+
+
+
   /* Draggable Marker with popup coordinates */
 
   var marker = L.marker(mapCenter, {
     draggable: true
   }).addTo(mymap);
 
-  function updateMarker(lat, lng) {
-    marker
-      .setLatLng([lat, lng])
+  var mapActionListener = {
+    updateMarker:function (lat, lng) {
+      marker
+            .setLatLng([lat, lng])
       // Popup update coordinate solution
-      .bindPopup("Your location :  " + marker.getLatLng().toString() + '<label for="latInput">Latitude</label>' +
-        '<input id="latInput" value=' + marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
-        '<input id="lngInput" value=' + marker.getLatLng().lng + '>')
-      .openPopup();
-
-    return false;
-  };
-
+            .bindPopup("Your location :  " + 
+              marker.getLatLng().toString()+'<label for="latInput">Latitude</label>'+
+              '<input id="latInput" value='+ 
+              marker.getLatLng().lat+'></br>'+'<label for="lngInput">Longitude</label>'+
+              '<input id="lngInput" value='+ 
+              marker.getLatLng().lng+'>')
+            .openPopup();
+      return false;
+    }
+  }
   /* Onclick update coordinates */
 
   //TODO: declare a function say mapClick and put the function here. 
@@ -39,7 +45,7 @@ function addMapPicker() {
     //map click event object (e) has latlng property which is a location at which the click occured.
     $('#latInput').val(e.latlng.lat);
     $('#lngInput').val(e.latlng.lng);
-    updateMarker(e.latlng.lat, e.latlng.lng);
+    mapActionListener.updateMarker(e.latlng.lat, e.latlng.lng);
   };
   mymap.on('click', onMapClick);
 
