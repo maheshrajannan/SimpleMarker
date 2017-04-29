@@ -1,8 +1,9 @@
 function addMapPicker() {
 	
 	var mapCenter = [22, 87];
-	
 	var mymap = L.map('mapid', {center : mapCenter, zoom : 5});
+
+/* Map GeoJson Link */
 
 	var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -10,173 +11,57 @@ function addMapPicker() {
 	}).addTo(mymap);
 
 
+/* Draggable Marker with popup coordinates */
 
 var marker = L.marker(mapCenter,{draggable: true}).addTo(mymap);
 
     function updateMarker(lat, lng) {
-        marker
+      marker
             .setLatLng([lat, lng])
-            .bindPopup("Your location :  " + marker.getLatLng().toString())
+// Popup update coordinate solution
+            .bindPopup("Your location :  " + marker.getLatLng().toString()+'<label for="latInput">Latitude</label>'+
+              '<input id="latInput" value='+marker.getLatLng().lat+'></br>'+'<label for="lngInput">Longitude</label>'+
+              '<input id="lngInput" value='+marker.getLatLng().lng+'>')
             .openPopup();
+            
           return false;
     };
     
-    //TODO: declare a function say mapClick and put the function here.
-    mymap.on('click', function(e) {
+  /* Onclick update coordinates */
+
+    //TODO: declare a function say mapClick and put the function here. 
+
+  function onMapClick(e) {
+        //map click event object (e) has latlng property which is a location at which the click occured.
         $('#latInput').val(e.latlng.lat);
         $('#lngInput').val(e.latlng.lng);
         updateMarker(e.latlng.lat, e.latlng.lng);
-    });
+  };
+  mymap.on('click', onMapClick);
 
     //TODO: declare a function say mapDragEnd and put the function here.
     //TODO: you can put these 2 functions mapDragEnd and mapClick , in to a class called mapActionListnere.
-   marker.on('dragend', function (e) {
 
-  document.getElementById('latInput').value = marker.getLatLng().lat;
-  document.getElementById('lngInput').value = marker.getLatLng().lng;
-  marker.bindPopup("Your location :  " + marker.getLatLng().toString())
-  });
+  function onMapDragEnd(e) {
+        //map click event object (e) has latlng property which is a location at which the click occured.
+        marker.bindPopup("pop drag"+'<div class="coordinput"><label for="latInput">Latitude</label><input id="latInput"/></br><label for="lngInput">Longitude</label><input id="lngInput"/></div>')
+        document.getElementById('latInput').value = marker.getLatLng().lat;
+        document.getElementById('lngInput').value = marker.getLatLng().lng;
+        updateMarker(e.latlng.lat, e.latlng.lng);
+  };
+  mymap.on('drag', onMapDragEnd);
 
+};
 
-    var updateMarkerByInputs = function() {
-	    return updateMarker( $('#latInput').val() , $('#lngInput').val());
-    }
-    $('#latInput').on('input', updateMarkerByInputs);
-    $('#lngInput').on('input', updateMarkerByInputs);
-}
+  var updateMarkerByInputs = function() {
+   return updateMarker( $('#latInput').val() , $('#lngInput').val());
+  }
+
+  $('#latInput').on('input', updateMarkerByInputs);
+  $('#lngInput').on('input', updateMarkerByInputs);
+
 $(document).ready(function() {
     addMapPicker();
 });
-/*
-
-<!-- -->
-mymap.on('click',
-  function mapClickListen(e) {
-    var pos = e.latlng;
-    console.log('map click event');
-    var marker = L.marker(
-      pos, {
-        draggable: true
-      }
-    );
-    marker.on('drag', function(e) {
-      console.log('marker drag event');
-    });
-    marker.on('dragstart', function(e) {
-      console.log('marker dragstart event');
-      map.off('click', mapClickListen);
-    });
-    marker.on('dragend', function(e) {
-      console.log('marker dragend event');
-      setTimeout(function() {
-        map.on('click', mapClickListen);
-      }, 10);
-    });
-    marker.addTo(mymap);
-  });
-
-  };   
 
 
-/* 
- * <!-- -->
-mymap.on('click', onMapClick);
-
-// Script for adding marker on map click
-function onMapClick(e) {
-
-    var geojsonFeature = {
-        "type": "Feature",
-            "properties": {},
-            "geometry": {
-                "type": "Point",
-                "coordinates": [e.latlng.lat, e.latlng.lng]
-               
-        }
-    }
- }   
- 
- 
-   var marker;
-
-    L.geoJson(geojsonFeature, {
-        
-        pointToLayer: function(feature, latlng){
-            
-            marker = L.marker(e.latlng, {
-                
-                title: "Resource Location",
-                alt: "Resource Location",
-                riseOnHover: true,
-                draggable: true,
-
-            }).bindPopup("</br><input type='button' value='Delete this marker' class='marker-delete-button'/>");
-
-            marker.on("popupopen", onPopupOpen);
-       
-            return marker;
-        }
-    }).addTo(mymap);
-}
- <!-- -->
-
-
-   
-    <!-- -->
-
-
-
-
-
-// Function to handle delete as well as other events on marker popup open
-function onPopupOpen() {
-
-    var tempMarker = this;
-
-    $(".marker-delete-button:visible ").click(function () {
-        mymap.removeLayer(tempMarker);
-    });
-}
-*/
-
-
-
-
-
-
-<!--alert coordinate when place a marker -->
-
-
-/*
-mymap.on('click', function(e) {
-    alert(e.latlng);
-});
-*/
-
-
-<!-- fixed markers -->
-
-/*	var marker = L.marker([40, 80]).addTo(mymap);
-
-	var point=[43.866667,18.416667];
-		var marker=L.marker(point).addTo(mymap);	
-
-	var point=[41.866667,14.416667];		
-		var marker=L.marker(point).addTo(mymap);
-		marker.bindPopup(
-			'<b>welcome</b><div><img style="width:100%" src="images/area.jpg" alt="image"/> </div>',
-			{minWidth:256}
-		);	
-
-	var point=[40.866667,20.416667];
-		var circle=L.circle(
-		point,
-		5000,
-		{
-			color:'purple',
-			fillColor:'red',
-			fillOpacity:0.8,
-		}
-		).addTo(mymap);
-		
-*/

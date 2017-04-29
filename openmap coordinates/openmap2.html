@@ -3,7 +3,7 @@
 <title> Leaflet Map </title>
 
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-
+<link rel="stylesheet" href="style.css" />
  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
  <script src="jquery.min.js"></script>
@@ -11,72 +11,12 @@
 
 
  <style type="text/css">
- 	#mapid { height: 500px; }
- 	
-.coordinput{
-	background-color: #fff;
-	border: 2px solid #ccc;
-	width:170px;
-	position: absolute;
-	z-index:1000;
-	right: 18px;
-	top: 18px;
-	border-radius: 4px;
-}
-label{
-    display: inline-block;
-    float: left;
-    clear: left;
-    width: 60px;
-    margin:5px;
-    text-align: right;
-}
-input {
-  display: inline-block;
-  width:80px;
-  float: left;
-  margin:5px;
-}
-
-
-/*
-* https://www.mapbox.com/mapbox.js/example/v1.0.0/custom-popup-style/
-
- * These CSS rules affect the tooltips within maps with the custom-popup
- * class. See the full CSS for all customizable options:
- * https://github.com/mapbox/mapbox.js/blob/001754177f3985c0e6b4a26e3c869b0c66162c99/theme/style.css#L321-L366
- */
-.custom-popup .leaflet-popup-content-wrapper {
-  background:#2c3e50;
-  color:#fff;
-  font-size:16px;
-  line-height:24px;
-  }
-.custom-popup .leaflet-popup-content-wrapper a {
-  color:rgba(255,255,255,0.5);
-  }
-.custom-popup .leaflet-popup-tip-container {
-  width:30px;
-  height:15px;
-  }
-.custom-popup .leaflet-popup-tip {
-  border-left:15px solid transparent;
-  border-right:15px solid transparent;
-  border-top:15px solid #2c3e50;
-  }
 
  </style>
 
 </head>
 <body>
- 
- <div class="coordinput">
-	<label for="latInput">Latitude</label>
-	<input id="latInput"/></br>
-	<label for="lngInput">Longitude</label>
-	<input id="lngInput"/>
- </div>
- 
+
  <div class='custom-popup' id="mapid"></div>
 
 </body>
