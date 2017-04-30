@@ -28,7 +28,7 @@ function addMapPicker() {
             .setLatLng([lat, lng])
       // Popup update coordinate solution
             .bindPopup("Your location :  " + 
-              marker.getLatLng().toString()+'<label for="latInput">Latitude</label>'+
+              marker.getLatLng().toString()+'</br><label for="latInput">Latitude</label>'+
               '<input id="latInput" value='+ 
               marker.getLatLng().lat+'></br>'+'<label for="lngInput">Longitude</label>'+
               '<input id="lngInput" value='+ 
@@ -57,7 +57,7 @@ function addMapPicker() {
       document.getElementById('latInput').value = marker.getLatLng().lat;
       document.getElementById('lngInput').value = marker.getLatLng().lng;
       marker.bindPopup("Your location :  " +
-                  marker.getLatLng().toString() + '<label for="latInput">Latitude</label>' +
+                  marker.getLatLng().toString() + '</br><label for="latInput">Latitude</label>' +
                   '<input id="latInput" value=' +
                   marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
                   '<input id="lngInput" value=' +

@@ -36,6 +36,7 @@ input {
 
 .custom-popup .leaflet-popup-content-wrapper {
   color:#fff;
+  width: 250px;
   font-size:11px;
   height:100px;
   line-height:24px;
