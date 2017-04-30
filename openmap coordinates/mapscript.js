@@ -70,7 +70,7 @@ function addMapPicker() {
 
 
 var updateMarkerByInputs = function() {
-  return updateMarker($('#latInput').val(), $('#lngInput').val());
+  return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
 
 $('#latInput').on('input', updateMarkerByInputs);
