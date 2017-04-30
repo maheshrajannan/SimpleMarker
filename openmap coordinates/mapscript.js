@@ -46,26 +46,27 @@ function addMapPicker() {
       $('#latInput').val(e.latlng.lat);
       $('#lngInput').val(e.latlng.lng);
       mapActionListener.updateMarker(e.latlng.lat, e.latlng.lng);
+    },
+  
+
+    //TODO: declare a function say mapDragEnd and put the function here.
+    //TODO: you can put these 2 functions mapDragEnd and mapClick , in to a class called mapActionListnere.
+
+    markerDragEnd:function(e) {
+      //map click event object (e) has latlng property which is a location at which the click occured.
+      document.getElementById('latInput').value = marker.getLatLng().lat;
+      document.getElementById('lngInput').value = marker.getLatLng().lng;
+      marker.bindPopup("Your location :  " +
+                  marker.getLatLng().toString() + '<label for="latInput">Latitude</label>' +
+                  '<input id="latInput" value=' +
+                  marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
+                  '<input id="lngInput" value=' +
+                  marker.getLatLng().lng + '>')
+              .openPopup();
     }
   }
   mymap.on('click',mapActionListener.mapClick);
-
-  //TODO: declare a function say mapDragEnd and put the function here.
-  //TODO: you can put these 2 functions mapDragEnd and mapClick , in to a class called mapActionListnere.
-
-  function onMarkerDragEnd(e) {
-    //map click event object (e) has latlng property which is a location at which the click occured.
-    document.getElementById('latInput').value = marker.getLatLng().lat;
-    document.getElementById('lngInput').value = marker.getLatLng().lng;
-    marker.bindPopup("Your location :  " +
-                marker.getLatLng().toString() + '<label for="latInput">Latitude</label>' +
-                '<input id="latInput" value=' +
-                marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
-                '<input id="lngInput" value=' +
-                marker.getLatLng().lng + '>')
-            .openPopup();
-  };
-  marker.on('dragend', onMarkerDragEnd);
+  marker.on('dragend', mapActionListener.markerDragEnd);
 
 
 
