@@ -32,8 +32,8 @@ function addMapPicker() {
               '<input id="latInput" value='+ 
               marker.getLatLng().lat+'></br>'+'<label for="lngInput">Longitude</label>'+
               '<input id="lngInput" value='+ 
-              marker.getLatLng().lng+'>')
-            .openPopup();
+              marker.getLatLng().lng+'><a href="#" class="marker-delete-button"/>Remove</a>')
+            .on("popupopen", onPopupOpen);
       return false;
     },
   
@@ -61,13 +61,22 @@ function addMapPicker() {
                   '<input id="latInput" value=' +
                   marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
                   '<input id="lngInput" value=' +
-                  marker.getLatLng().lng + '>')
-              .openPopup();
+                  marker.getLatLng().lng + '><a href="#" class="marker-delete-button"/>Remove</a>')
+            .on("popupopen", onPopupOpen);
     }
   }
   mymap.on('click',mapActionListener.mapClick);
   marker.on('dragend', mapActionListener.markerDragEnd);
 
+  // Function for deleting marker
+  function onPopupOpen() {
+
+      var tempMarker = this;
+
+      $(".marker-delete-button:visible").click(function () {
+          mymap.removeLayer(tempMarker);
+      });
+  }
 
 
 var updateMarkerByInputs = function() {
