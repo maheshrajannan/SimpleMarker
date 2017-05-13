@@ -11,8 +11,6 @@ function addMapPicker() {
   }).addTo(mymap);
 
 
-
-
   /* Draggable Marker with popup coordinates */
 
   // var marker = L.marker([51.505, -0.09], {
@@ -46,13 +44,33 @@ function addMapPicker() {
       $('#latInput').val(e.latlng.lat);
       $('#lngInput').val(e.latlng.lng);
       mapActionListener.updateMarker(marker,e.latlng.lat, e.latlng.lng);
+      //this is not bound to mapActionListener, it points to some map API's class.
+      marker.on('dragend', mapActionListener.markerDragEnd);
     },
   
 
-    //TODO: declare a function say mapDragEnd and put the function here.
-    //TODO: you can put these 2 functions mapDragEnd and mapClick , in to a class called mapActionListnere.
+    //TODO: declare a function say mapDragEnd and put the function here.DONE ?
+    //TODO: you can put these 2 functions mapDragEnd and mapClick , 
+    //in to a class called mapActionListner. DONE ?
+    //TODO: does not update the marker.DONE
+    //INFO: http://stackoverflow.com/questions/18575722/leaflet-js-set-marker-on-click-update-postion-on-drag
 
-    markerDragEnd:function(e) {
+    markerDragEnd:function(ev) {
+      //TODO: use some kind of marker
+      //alert("ev="+ev);
+      //alert("ev.target="+ev.target);
+      //alert("ev.target.getLatLng()="+ev.target.getLatLng());
+      var marker = ev.target;
+      marker.bindPopup("Your location :  " +
+                  marker.getLatLng().toString() + '</br><label for="latInput">Latitude</label>' +
+                  '<input id="latInput" value=' +
+                  marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
+                  '<input id="lngInput" value=' +
+                  marker.getLatLng().lng + '><a href="#" class="marker-delete-button"/>Remove</a>')
+            .on("popupopen", onPopupOpen);      
+      //alert("ev.target.getLatLng().lat="+ev.target.getLatLng().lat);
+      //alert("ev.target.getLatLng().lng="+ev.target.getLatLng().lng);
+      /*
       var marker = L.marker(e.latlng, {
        draggable: true
       }).addTo(mymap);
@@ -65,7 +83,7 @@ function addMapPicker() {
                   marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
                   '<input id="lngInput" value=' +
                   marker.getLatLng().lng + '><a href="#" class="marker-delete-button"/>Remove</a>')
-            .on("popupopen", onPopupOpen);
+            .on("popupopen", onPopupOpen);*/
     }
   }
   mymap.on('click',mapActionListener.mapClick);
@@ -86,6 +104,7 @@ var updateMarkerByInputs = function() {
   return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
+//TODO: this will not work as there are multiple markers.
 $('#latInput').on('input', updateMarkerByInputs);
 $('#lngInput').on('input', updateMarkerByInputs);
 }
