@@ -1,10 +1,6 @@
 function addMapPicker() {
 
-  var mapCenter = [22, 87];
-  var mymap = L.map('mapid', {
-    center: mapCenter,
-    zoom: 5
-  });
+  var mymap = L.map('mapid').setView([51.505, -0.09], 5);
 
   /* Map GeoJson Link */
 
@@ -18,9 +14,9 @@ function addMapPicker() {
 
   /* Draggable Marker with popup coordinates */
 
-  var marker = L.marker(mapCenter, {
-    draggable: true
-  }).addTo(mymap);
+  var marker = L.marker([51.505, -0.09], {
+       draggable: true
+      }).addTo(mymap);
 
   var mapActionListener = {
     updateMarker:function (lat, lng) {
@@ -42,6 +38,9 @@ function addMapPicker() {
   //TODO: declare a function say mapClick and put the function here. 
 
     mapClick:function(e) {
+      marker = L.marker(e.latlng, {
+       draggable: true
+      }).addTo(mymap);
       //map click event object (e) has latlng property which is a location at which the click occured.
       $('#latInput').val(e.latlng.lat);
       $('#lngInput').val(e.latlng.lng);
