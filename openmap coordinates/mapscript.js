@@ -1,5 +1,6 @@
 function addMapPicker() {
 
+  //TODO: get current location coordinates, then set the view, that is closely relevant.
   var mymap = L.map('mapid').setView([51.505, -0.09], 5);
 
   /* Map GeoJson Link */
@@ -44,7 +45,7 @@ function addMapPicker() {
       $('#latInput').val(e.latlng.lat);
       $('#lngInput').val(e.latlng.lng);
       mapActionListener.updateMarker(marker,e.latlng.lat, e.latlng.lng);
-      //this is not bound to mapActionListener, it points to some map API's class.
+      //"this" is not bound to mapActionListener, it points to some map API's class.
       marker.on('dragend', mapActionListener.markerDragEnd);
     },
   
@@ -56,7 +57,6 @@ function addMapPicker() {
     //INFO: http://stackoverflow.com/questions/18575722/leaflet-js-set-marker-on-click-update-postion-on-drag
 
     markerDragEnd:function(ev) {
-      //TODO: use some kind of marker
       //alert("ev="+ev);
       //alert("ev.target="+ev.target);
       //alert("ev.target.getLatLng()="+ev.target.getLatLng());
@@ -68,22 +68,6 @@ function addMapPicker() {
                   '<input id="lngInput" value=' +
                   marker.getLatLng().lng + '><a href="#" class="marker-delete-button"/>Remove</a>')
             .on("popupopen", onPopupOpen);      
-      //alert("ev.target.getLatLng().lat="+ev.target.getLatLng().lat);
-      //alert("ev.target.getLatLng().lng="+ev.target.getLatLng().lng);
-      /*
-      var marker = L.marker(e.latlng, {
-       draggable: true
-      }).addTo(mymap);
-      //map click event object (e) has latlng property which is a location at which the click occured.
-      document.getElementById('latInput').value = marker.getLatLng().lat;
-      document.getElementById('lngInput').value = marker.getLatLng().lng;
-      marker.bindPopup("Your location :  " +
-                  marker.getLatLng().toString() + '</br><label for="latInput">Latitude</label>' +
-                  '<input id="latInput" value=' +
-                  marker.getLatLng().lat + '></br>' + '<label for="lngInput">Longitude</label>' +
-                  '<input id="lngInput" value=' +
-                  marker.getLatLng().lng + '><a href="#" class="marker-delete-button"/>Remove</a>')
-            .on("popupopen", onPopupOpen);*/
     }
   }
   mymap.on('click',mapActionListener.mapClick);
@@ -91,18 +75,19 @@ function addMapPicker() {
 
   // Function for deleting marker
   function onPopupOpen() {
-
       var tempMarker = this;
-
       $(".marker-delete-button:visible").click(function () {
           mymap.removeLayer(tempMarker);
       });
   }
 
+//TODO: this will not work as there are multiple markers.
 
 var updateMarkerByInputs = function() {
   return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
+//TODO: write 2 lines about what this line below does ? 
+//IF you found it  a site then please add the url here.
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
 //TODO: this will not work as there are multiple markers.
 $('#latInput').on('input', updateMarkerByInputs);
