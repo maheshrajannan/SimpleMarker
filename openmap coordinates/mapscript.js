@@ -18,6 +18,7 @@ function addMapPicker() {
   //      draggable: true
   //     }).addTo(mymap);
 
+
   var mapActionListener = {
     updateMarker:function (marker,lat, lng) {
       marker
@@ -54,7 +55,8 @@ function addMapPicker() {
     //TODO: you can put these 2 functions mapDragEnd and mapClick , 
     //in to a class called mapActionListner. DONE ?
     //TODO: does not update the marker.DONE
-    //INFO: http://stackoverflow.com/questions/18575722/leaflet-js-set-marker-on-click-update-postion-on-drag
+    //INFO: http://stackoverflow.com/questions/18575722/
+    //leaflet-js-set-marker-on-click-update-postion-on-drag
 
     markerDragEnd:function(ev) {
       //alert("ev="+ev);
@@ -86,6 +88,31 @@ function addMapPicker() {
 var updateMarkerByInputs = function() {
   return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
+//User Location
+  // function onLocationFound(e) {
+  //        var radius = e.accuracy / 2;
+  //        var location = e.latlng
+  //        L.marker(location).addTo(mymap)
+  //        L.circle(location, radius).addTo(mymap);
+  //     }
+
+  //     function onLocationError(e) {
+  //        alert(e.message);
+  //     }
+
+  //     function getLocationLeaflet() {
+  //        mymap.on('locationfound', onLocationFound);
+  //        mymap.on('locationerror', onLocationError);
+
+  //        mymap.locate({setView: true, maxZoom: 16});
+  //     }
+
+var lc = L.control.locate({
+    position: 'topleft',
+    strings: {
+        title: "Show me where I am, yo!"
+    }
+}).addTo(mymap);
 //TODO: write 2 lines about what this line below does ? 
 //IF you found it  a site then please add the url here.
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);

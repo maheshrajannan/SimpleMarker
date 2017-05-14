@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <head>
 <title> Leaflet Map </title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="style.css" />
+ 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+	<!-- <!-- Third Party Plugin -->
+    <link rel="stylesheet" href="L.Control.Locate.min.css" />
+    <script src="L.Control.Locate.js" ></script>
 
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-<link rel="stylesheet" href="style.css" />
- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
  <!-- Load Esri Leaflet from CDN.  it has no .css stylesheet of its own, only .js -->
-  <script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script>
-
- <script src="jquery.min.js"></script>
- <script src="mapscript.js"></script>
-
-
- <style type="text/css">
-
- </style>
-
+ <!-- <script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script> -->
+	<script src="jquery.min.js"></script>
+ 	<script src="mapscript.js"></script>
 </head>
 <body>
-
- <div class="coordinput">
-	<label for="latInput">Latitude</label>
-	<input id="latInput"/></br>
-	<label for="lngInput">Longitude</label>
-	<input id="lngInput"/>
- </div>
-
- <div class='custom-popup' id="mapid"></div>
-
+	<div class="coordinput">
+		<label for="latInput">Latitude</label>
+		<input id="latInput"/></br>
+		<label for="lngInput">Longitude</label>
+		<input id="lngInput"/>
+	</div>
+	<div class='custom-popup' id="mapid"></div>
 </body>
 </html>
