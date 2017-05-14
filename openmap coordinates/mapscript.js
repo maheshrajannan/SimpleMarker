@@ -89,24 +89,7 @@ var updateMarkerByInputs = function() {
   return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
 //User Location
-  // function onLocationFound(e) {
-  //        var radius = e.accuracy / 2;
-  //        var location = e.latlng
-  //        L.marker(location).addTo(mymap)
-  //        L.circle(location, radius).addTo(mymap);
-  //     }
-
-  //     function onLocationError(e) {
-  //        alert(e.message);
-  //     }
-
-  //     function getLocationLeaflet() {
-  //        mymap.on('locationfound', onLocationFound);
-  //        mymap.on('locationerror', onLocationError);
-
-  //        mymap.locate({setView: true, maxZoom: 16});
-  //     }
-
+//INFO: https://github.com/domoritz/leaflet-locatecontrol
 var lc = L.control.locate({
     position: 'topleft',
     strings: {

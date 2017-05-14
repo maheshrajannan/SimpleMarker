@@ -1,4 +1,7 @@
- 	#mapid { height: 500px; }
+html, body, #mapid { 
+  height: 100%;
+  width: 100%;
+}
  	
 .coordinput{
   background-color: #fff;
