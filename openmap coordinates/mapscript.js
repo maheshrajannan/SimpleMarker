@@ -18,6 +18,18 @@ function addMapPicker() {
   //      draggable: true
   //     }).addTo(mymap);
 
+  /* Car Marker */  
+  var carIcon = L.icon(
+      { 
+        iconUrl: 'car-icon.png',
+        shadowUrl: 'marker-shadow.png',
+        iconSize: [30,45],
+        shadowSize: [55,68],
+        iconAnchor: [14,40],
+        shadowAnchor: [18,63],
+        popupAnchor: [-3,-76]
+      }
+    );
 
   var mapActionListener = {
     updateMarker:function (marker,lat, lng) {
@@ -39,7 +51,7 @@ function addMapPicker() {
   //TODO: declare a function say mapClick and put the function here. 
 
     mapClick:function(e) {
-      var marker = L.marker(e.latlng, {
+      var marker = L.marker(e.latlng, {icon: carIcon,
        draggable: true
       }).addTo(mymap);
       //map click event object (e) has latlng property which is a location at which the click occured.
