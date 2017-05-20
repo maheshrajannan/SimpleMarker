@@ -26,8 +26,8 @@ function addMapPicker() {
         iconSize: [30,45],
         shadowSize: [55,68],
         iconAnchor: [14,40],
-        shadowAnchor: [18,63],
-        popupAnchor: [-3,-76]
+        shadowAnchor: [17,63],
+        popupAnchor: [1,-35]
       }
     );
 
