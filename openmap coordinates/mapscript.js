@@ -1,22 +1,22 @@
 function addMapPicker() {
-
-  //TODO: get current location coordinates, then set the view, that is closely relevant.
+//INFO: find where this function ends.
   var mymap = L.map('mapid').setView([51.505, -0.09], 5);
 
   /* Map GeoJson Link */
    // L.esri.basemapLayer('Topographic').addTo(mymap);
 
-  var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  var OpenStreetMap_Mapnik = L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
 
-
-  /* Draggable Marker with popup coordinates */
-
-  // var marker = L.marker([51.505, -0.09], {
-  //      draggable: true
-  //     }).addTo(mymap);
+  /* 
+  Draggable Marker with popup coordinates
+  var marker = L.marker([51.505, -0.09], {
+  draggable: true
+  }).addTo(mymap);
+  */
 
   /* Car Marker */  
   var carIcon = L.icon(
@@ -108,6 +108,12 @@ var lc = L.control.locate({
         title: "Show me where I am, yo!"
     }
 }).addTo(mymap);
+/**INFO:
+You can call start() or stop() 
+on the locate control object to set the location on page load for example.
+https://github.com/domoritz/leaflet-locatecontrol
+**/
+lc.start();
 //TODO: write 2 lines about what this line below does ? 
 //IF you found it  a site then please add the url here.
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
