@@ -1,15 +1,34 @@
 function addMapPicker() {
-//INFO: find where this function ends.
-  var mymap = L.map('mapid').setView([51.505, -0.09], 5);
+  //TODO: When setting the view for the very first time, 
+  //set it to user's location, by default.
+  var mymap = L.map('mapid');
+  //mymap.setZoom(1);
 
   /* Map GeoJson Link */
    // L.esri.basemapLayer('Topographic').addTo(mymap);
 
   var OpenStreetMap_Mapnik = L.tileLayer(
     'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+      //INFO:removed zoom options, the L control automatically finds appropriate zoom.
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
+
+//User Location
+//INFO: https://github.com/domoritz/leaflet-locatecontrol
+var lc = L.control.locate({
+    position: 'topleft',
+    setView: 'always',
+    strings: {
+        title: "Show me where I am, yo!"
+    }
+}).addTo(mymap);
+/**INFO:
+You can call start() or stop() 
+on the locate control object to set the location on page load for example.
+https://github.com/domoritz/leaflet-locatecontrol
+**/
+lc.start();
+
 
   /* 
   Draggable Marker with popup coordinates
@@ -100,20 +119,7 @@ function addMapPicker() {
 var updateMarkerByInputs = function() {
   return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
 }
-//User Location
-//INFO: https://github.com/domoritz/leaflet-locatecontrol
-var lc = L.control.locate({
-    position: 'topleft',
-    strings: {
-        title: "Show me where I am, yo!"
-    }
-}).addTo(mymap);
-/**INFO:
-You can call start() or stop() 
-on the locate control object to set the location on page load for example.
-https://github.com/domoritz/leaflet-locatecontrol
-**/
-lc.start();
+
 //TODO: write 2 lines about what this line below does ? 
 //IF you found it  a site then please add the url here.
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
