@@ -12,7 +12,7 @@ function addMapPicker() {
       //INFO:removed zoom options, the L control automatically finds appropriate zoom.
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
-
+  mymap.locate({setView: true, maxZoom:12});
 //User Location
 //INFO: https://github.com/domoritz/leaflet-locatecontrol
 var lc = L.control.locate({
@@ -27,7 +27,7 @@ You can call start() or stop()
 on the locate control object to set the location on page load for example.
 https://github.com/domoritz/leaflet-locatecontrol
 **/
-lc.start();
+
 
 
   /* 
