@@ -1,5 +1,5 @@
 function addMapPicker() {
-  //TODO: When setting the view for the very first time, 
+  //TODO: When setting the view for the very first time DONE.
   //set it to user's location, by default.
   var mymap = L.map('mapid');
   //mymap.setZoom(1);
@@ -67,7 +67,7 @@ lc.start();
   
   /* Onclick update coordinates */
 
-  //TODO: declare a function say mapClick and put the function here. 
+  //TODO: declare a function say mapClick and put the function here DONE.
 
     mapClick:function(e) {
       var marker = L.marker(e.latlng, {icon: carIcon,
@@ -82,9 +82,9 @@ lc.start();
     },
   
 
-    //TODO: declare a function say mapDragEnd and put the function here.DONE ?
-    //TODO: you can put these 2 functions mapDragEnd and mapClick , 
-    //in to a class called mapActionListner. DONE ?
+    //TODO: declare a function say mapDragEnd and put the function here DONE.
+    //TODO: you can put these 2 functions mapDragEnd and mapClick DONE. 
+    //in to a class called mapActionListner DONE.
     //TODO: does not update the marker.DONE
     //INFO: http://stackoverflow.com/questions/18575722/
     //leaflet-js-set-marker-on-click-update-postion-on-drag
