@@ -114,9 +114,44 @@ lc.start();
       });
   }
 
-
 //INFO:map unit scale
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
+
+//QUnit testing
+QUnit.test("map default options", function( assert ) {
+  assert.equal(mymap.toString(),
+            "LatLng(0, 8.846)",
+            "The map is centered at the ZMT's longitude, and the equator"
+    );
+    assert.equal(mymap.getZoom(),
+            2,
+            "The default zoom is set to 2"
+    );
+});
+
+QUnit.test("baseLayer layerGroup", function( assert ) {
+    assert.equal(baseLayer.getLayers().length,
+            1,
+            "There is just one layer in 'baseLayer' layerGroup"
+    );
+    assert.equal(baseLayer.getLayers()[0]._url,
+            "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "The url of the layer leads to the correct openstreet map tiles"
+    );
+
+    assert.equal(baseLayer.getLayers()[0].options.attribution,
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            "The attribution for the layer is correct"
+    );
+    assert.equal(baseLayer.getLayers()[0].options.minZoom,
+            0,
+            "The default minimum zoom is set to 0"
+    );
+    assert.equal(baseLayer.getLayers()[0].options.maxZoom,
+            19,
+            "The default maximum zoom is set to 19"
+    );
+});
 }
 $(document).ready(function() {
   addMapPicker();

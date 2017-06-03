@@ -8,13 +8,17 @@
 	<!-- Third Party Plugin -->
     <link rel="stylesheet" href="L.Control.Locate.min.css" />
     <script src="L.Control.Locate.js" ></script>
-
+ 	<!-- Qunit testing -->
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
+  	<script src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
  <!-- Load Esri Leaflet from CDN.  it has no .css stylesheet of its own, only .js -->
  <!-- <script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script> -->
 	<script src="jquery.min.js"></script>
  	<script src="mapscript.js"></script>
 </head>
 <body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
 	<div class='custom-popup' id="mapid"></div>
 </body>
 </html>
