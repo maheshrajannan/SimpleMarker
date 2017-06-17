@@ -23,6 +23,9 @@ var lc = L.control.locate({
         title: "Show me where I am, yo!"
     }
 }).addTo(mymap);
+console.log(e._event.latitude);
+console.log(lc);
+
 /**INFO:
 You can call start() or stop() 
 on the locate control object to set the location on page load for example.
@@ -167,21 +170,24 @@ QUnit.test("baseLayer layerGroup", function( assert ) {
     );
 
 });
-//Testing
+// Testing User Loation
+// TODO here we need to check the lat and lng value of user location.
+// the variable lc have the object e, It have the use location lat lng value
+// so we need to compare the result lat lng to expected lat lng 
+// Note : check the line 26 and 27 console.log
 QUnit.test("symbol with valid position, course and invalid speed", function (assert) {
-      var mymap = L.map('mapid');
-    // var lc = L.control.locate({
-    // position: 'topleft',
-    // setView: 'always',
-    // drawMarker: true,
-    // strings: {
-    //     title: "Show me where I am, yo!"
-    // }
-    // }).addTo(mymap);
-      var result = mapid;
-    // var result = trackSymbol.getPathString();
-      assert.equal(result, expected);
+    var lc = L.control.locate({
+    position: 'topleft',
+    setView: 'always',
+    drawMarker: true,
+    strings: {
+        title: "Show me where I am, yo!"
+    }
+    }).addTo(mymap);
+      var expected = mymap.locate();
+      assert.equal(lc, expected);
 });
+// Testing Marker
 // QUnit.test("a test", function(assert) {
 //   assert.expect(1);
  
