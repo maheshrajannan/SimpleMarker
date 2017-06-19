@@ -20,12 +20,12 @@ var lc = L.control.locate({
     setView: 'always',
     drawMarker: true,
     strings: {
-        title: "Show me where I am, yo!"
+        title: "Show me where I am, yo!",
     }
 }).addTo(mymap);
-console.log(e._event.latitude);
-console.log(lc);
-
+// console.log(lc);
+// console.log($(lc)[0]);
+// console.log($(lc)[0]._event.latitude);
 /**INFO:
 You can call start() or stop() 
 on the locate control object to set the location on page load for example.
@@ -33,6 +33,16 @@ https://github.com/domoritz/leaflet-locatecontrol
 **/
 lc.start();
 
+console.log(lc);
+console.log($(lc)[0]);
+// console.log($(lc)[0]._event.latitude);
+if($(lc)[0]._event) {
+  //console.log($(lc)[0]._event.latitude);  
+}
+
+setTimeout(() => {
+  console.log($(lc)[0]._event.latitude);
+}, 6000);
 
   /* 
   Draggable Marker with popup coordinates
@@ -122,13 +132,14 @@ lc.start();
 L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
 console.log(mymap);
 console.log($(mymap)[0]);
-var myVal = $(mymap)[0];
-for(var item in myVal) {
-  // console.log(item);
-  if(item == "_lastCenter") {
-    console.log("true");
-  }
-}
+
+// var myVal = $(mymap)[0];
+// for(var item in myVal) {
+//   // console.log(item);
+//   if(item == "_lastCenter") {
+//     console.log("true");
+//   }
+// }
 // console.log($(mymap)[0]._lastCenter);
 // console.log($(mymap)[0]._layersMaxZoom);
 // console.log($(mymap)[0]._layersMinZoom);
@@ -172,10 +183,10 @@ QUnit.test("baseLayer layerGroup", function( assert ) {
 });
 // Testing User Loation
 // TODO here we need to check the lat and lng value of user location.
-// the variable lc have the object e, It have the use location lat lng value
+// the variable lc have the object e, It have the user location lat lng value
 // so we need to compare the result lat lng to expected lat lng 
 // Note : check the line 26 and 27 console.log
-QUnit.test("symbol with valid position, course and invalid speed", function (assert) {
+QUnit.test("User Location", function (assert) {
     var lc = L.control.locate({
     position: 'topleft',
     setView: 'always',
@@ -184,8 +195,14 @@ QUnit.test("symbol with valid position, course and invalid speed", function (ass
         title: "Show me where I am, yo!"
     }
     }).addTo(mymap);
-      var expected = mymap.locate();
-      assert.equal(lc, expected);
+    lc.start();
+    setTimeout(() => {
+    console.log($(lc)[0]._event.latitude);
+    }, 6000);
+    var result = $(lc)[0]._event.latitude; 
+    console.log(result);
+    var expected = 12.9715987;
+    assert.equal(result, 12.9715987,"latitude");
 });
 // Testing Marker
 // QUnit.test("a test", function(assert) {
