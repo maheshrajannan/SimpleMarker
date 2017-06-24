@@ -54,8 +54,8 @@ setTimeout(() => {
   /* Car Marker */  
   var carIcon = L.icon(
       { 
-        iconUrl: 'images/car-icon.png',
-        shadowUrl: 'images/marker-shadow.png',
+        iconUrl: 'car-icon.png',
+        shadowUrl: 'marker-shadow.png',
         iconSize: [30,45],
         shadowSize: [55,68],
         iconAnchor: [14,40],
@@ -148,6 +148,74 @@ console.log($(mymap)[0]);
 // console.log($(mymap)[0]);
 
 // console.log(typeof(mymap));
+
+//QUnit testing
+QUnit.test("map default options", function( assert ) {
+  console.log('MyMap'+Inspect.methods(mymap));
+  mymap.setZoom(18);
+  console.log('zoom'+mymap.getZoom());
+  assert.equal(mymap.getZoom(),
+            18,
+            "The map is centered at the ZMT's longitude, and the equator"
+    );
+    assert.equal(mymap.getZoom(),
+            18,
+            "The default zoom is set to 2"
+    );
+});
+
+QUnit.test("baseLayer layerGroup", function( assert ) {
+    assert.equal(baseLayer.getLayers().length,
+            1,
+            "There is just one layer in 'baseLayer' layerGroup"
+    );console.log(mymap.toString());
+
+    assert.equal(baseLayer.getLayers()[0]._url,
+            "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "The url of the layer leads to the correct openstreet map tiles"
+    );
+
+    assert.equal(baseLayer.getLayers()[0].options.attribution,
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            "The attribution for the layer is correct"
+    );
+
+});
+// Testing User Loation
+// TODO here we need to check the lat and lng value of user location.
+// the variable lc have the object e, It have the user location lat lng value
+// so we need to compare the result lat lng to expected lat lng 
+// Note : check the line 26 and 27 console.log
+QUnit.test("User Location", function (assert) {
+    var lc = L.control.locate({
+    position: 'topleft',
+    setView: 'always',
+    drawMarker: true,
+    strings: {
+        title: "Show me where I am, yo!"
+    }
+    }).addTo(mymap);
+    lc.start();
+    setTimeout(() => {
+    console.log($(lc)[0]._event.latitude);
+    }, 6000);
+    var result = $(lc)[0]._event.latitude; 
+    console.log(result);
+    var expected = 12.9715987;
+    assert.equal(result, 12.9715987,"latitude");
+});
+// Testing Marker
+// QUnit.test("a test", function(assert) {
+//   assert.expect(1);
+ 
+//   var $body = $("body");
+ 
+//   $body.on("click", function() {
+//     assert.ok(true, "body was clicked!");
+//   });
+ 
+//   $body.trigger("click");
+// });
 }
 $(document).ready(function() {
   addMapPicker();

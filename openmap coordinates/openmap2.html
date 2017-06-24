@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-	<head>
-		<title> Leaflet Map </title>
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-		<link rel="stylesheet" href="style/style.css" />
-	 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-		<!-- Third Party User Locate Plugin -->
-	    <link rel="stylesheet" href="style/L.Control.Locate.min.css" />
-	    <script src="script/L.Control.Locate.js" ></script>
-	    
-	 	<!-- Load Esri Leaflet from CDN.  it has no .css stylesheet of its own, only .js -->
-		<!-- <script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script> -->
-		<script src="script/jquery.min.js"></script>
-	 	<script src="script/mapscript.js"></script>
-	</head>
-	<body>
-		<div class='custom-popup' id="mapid"></div>
-	</body>
+<head>
+<title> Leaflet Map </title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link rel="stylesheet" href="style/style.css" />
+ 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Third Party Plugin -->
+    <link rel="stylesheet" href="style/L.Control.Locate.min.css" />
+    <script src="script/L.Control.Locate.js" ></script>
+ 	<!-- Qunit testing -->
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
+  	<script src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
+ <!-- Load Esri Leaflet from CDN.  it has no .css stylesheet of its own, only .js -->
+ <!-- <script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script> -->
+	<script src="script/jquery.min.js"></script>
+ 	<script src="script/mapscript.js"></script>
+ 	<script src="script/inspect.js"></script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<div class='custom-popup' id="mapid"></div>
+</body>
 </html>
