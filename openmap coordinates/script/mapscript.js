@@ -1,23 +1,55 @@
 function addMapPicker() {
-
-  //TODO: get current location coordinates, then set the view, that is closely relevant.
+  //TODO: When setting the view for the very first time DONE.
+  //TODO: Location search plugin.
+  //set it to user's location, by default.
   var mymap = L.map('mapid');
+  //mymap.setZoom(1);
 
   /* Map GeoJson Link */
    // L.esri.basemapLayer('Topographic').addTo(mymap);
 
-  var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+  var OpenStreetMap_Mapnik = L.tileLayer(
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19,
+      //INFO:removed zoom options, the L control automatically finds appropriate zoom.
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
-  mymap.locate({setView: true, maxZoom:12});
+//User Location
+//INFO: https://github.com/domoritz/leaflet-locatecontrol
+var lc = L.control.locate({
+    position: 'topleft',
+    setView: 'always',
+    drawMarker: true,
+    strings: {
+        title: "Show me where I am, yo!",
+    }
+}).addTo(mymap);
+// console.log(lc);
+// console.log($(lc)[0]);
+// console.log($(lc)[0]._event.latitude);
+/**INFO:
+You can call start() or stop() 
+on the locate control object to set the location on page load for example.
+https://github.com/domoritz/leaflet-locatecontrol
+**/
+lc.start();
 
+console.log(lc);
+console.log($(lc)[0]);
+// console.log($(lc)[0]._event.latitude);
+if($(lc)[0]._event) {
+  //console.log($(lc)[0]._event.latitude);  
+}
 
-  /* Draggable Marker with popup coordinates */
+setTimeout(() => {
+  console.log($(lc)[0]._event.latitude);
+}, 6000);
 
-  // var marker = L.marker([51.505, -0.09], {
-  //      draggable: true
-  //     }).addTo(mymap);
+  /* 
+  Draggable Marker with popup coordinates
+  var marker = L.marker([51.505, -0.09], {
+  draggable: true
+  }).addTo(mymap);
+  */
 
   /* Car Marker */  
   var carIcon = L.icon(
@@ -49,7 +81,7 @@ function addMapPicker() {
   
   /* Onclick update coordinates */
 
-  //TODO: declare a function say mapClick and put the function here. 
+  //TODO: declare a function say mapClick and put the function here DONE.
 
     mapClick:function(e) {
       var marker = L.marker(e.latlng, {icon: carIcon,
@@ -64,9 +96,9 @@ function addMapPicker() {
     },
   
 
-    //TODO: declare a function say mapDragEnd and put the function here.DONE ?
-    //TODO: you can put these 2 functions mapDragEnd and mapClick , 
-    //in to a class called mapActionListner. DONE ?
+    //TODO: declare a function say mapDragEnd and put the function here DONE.
+    //TODO: you can put these 2 functions mapDragEnd and mapClick DONE. 
+    //in to a class called mapActionListner DONE.
     //TODO: does not update the marker.DONE
     //INFO: http://stackoverflow.com/questions/18575722/
     //leaflet-js-set-marker-on-click-update-postion-on-drag
@@ -96,25 +128,94 @@ function addMapPicker() {
       });
   }
 
-//TODO: this will not work as there are multiple markers.
+//INFO:map unit scale
+L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
+console.log(mymap);
+console.log($(mymap)[0]);
 
-var updateMarkerByInputs = function() {
-  return mapActionListener.updateMarker($('#latInput').val(), $('#lngInput').val());
-}
-//User Location
-//INFO: https://github.com/domoritz/leaflet-locatecontrol
-var lc = L.control.locate({
+// var myVal = $(mymap)[0];
+// for(var item in myVal) {
+//   // console.log(item);
+//   if(item == "_lastCenter") {
+//     console.log("true");
+//   }
+// }
+// console.log($(mymap)[0]._lastCenter);
+// console.log($(mymap)[0]._layersMaxZoom);
+// console.log($(mymap)[0]._layersMinZoom);
+// console.log(mymap);
+// console.log($(mymap)[0].keyboard);
+// console.log($(mymap)[0]);
+
+// console.log(typeof(mymap));
+
+//QUnit testing
+QUnit.test("map default options", function( assert ) {
+  console.log('MyMap'+Inspect.methods(mymap));
+  mymap.setZoom(18);
+  console.log('zoom'+mymap.getZoom());
+  assert.equal(mymap.getZoom(),
+            18,
+            "The map is centered at the ZMT's longitude, and the equator"
+    );
+    assert.equal(mymap.getZoom(),
+            18,
+            "The default zoom is set to 2"
+    );
+});
+
+QUnit.test("baseLayer layerGroup", function( assert ) {
+    assert.equal(baseLayer.getLayers().length,
+            1,
+            "There is just one layer in 'baseLayer' layerGroup"
+    );console.log(mymap.toString());
+
+    assert.equal(baseLayer.getLayers()[0]._url,
+            "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "The url of the layer leads to the correct openstreet map tiles"
+    );
+
+    assert.equal(baseLayer.getLayers()[0].options.attribution,
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            "The attribution for the layer is correct"
+    );
+
+});
+// Testing User Loation
+// TODO here we need to check the lat and lng value of user location.
+// the variable lc have the object e, It have the user location lat lng value
+// so we need to compare the result lat lng to expected lat lng 
+// Note : check the line 26 and 27 console.log
+QUnit.test("User Location", function (assert) {
+    var lc = L.control.locate({
     position: 'topleft',
+    setView: 'always',
+    drawMarker: true,
     strings: {
         title: "Show me where I am, yo!"
     }
-}).addTo(mymap);
-//TODO: write 2 lines about what this line below does ? 
-//IF you found it  a site then please add the url here.
-L.control.scale({maxWidth:100, metric:true, position: 'bottomleft'}).addTo(mymap);
-//TODO: this will not work as there are multiple markers.
-$('#latInput').on('input', updateMarkerByInputs);
-$('#lngInput').on('input', updateMarkerByInputs);
+    }).addTo(mymap);
+    lc.start();
+    setTimeout(() => {
+    console.log($(lc)[0]._event.latitude);
+    }, 6000);
+    var result = $(lc)[0]._event.latitude; 
+    console.log(result);
+    var expected = 12.9715987;
+    assert.equal(result, 12.9715987,"latitude");
+});
+// Testing Marker
+// QUnit.test("a test", function(assert) {
+//   assert.expect(1);
+ 
+//   var $body = $("body");
+ 
+//   $body.on("click", function() {
+//     assert.ok(true, "body was clicked!");
+//   });
+ 
+//   $body.trigger("click");
+// });
 }
 $(document).ready(function() {
   addMapPicker();
