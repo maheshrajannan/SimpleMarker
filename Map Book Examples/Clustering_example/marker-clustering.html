@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet debug page</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js" integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA==" crossorigin=""></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="screen.css" />
+
+	<link rel="stylesheet" href="../Clustering_example/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="../Clustering_example/dist/MarkerCluster.Default.css" />
+	<script src="../Clustering_example/dist/leaflet.markercluster-src.js"></script>
+</head>
+<body>
+
+	<div id="map"></div>
+	<button id="populate">Populate 1 marker</button>
+	<button id="remove">Remove 1 marker</button>
+
+	<script type="text/javascript">
+
+		var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+			}),
+			latlng = new L.LatLng(50.5, 30.51);
+
+		var map = new L.Map('map', {center: latlng, zoom: 15, layers: [tiles]});
+
+		//INFO: how is the marker cluster group, related to map ? What is this L variable ?
+		var markerClusterGroup = new L.MarkerClusterGroup();
+		var markersList = [];
+
+			function mapClick(e) {
+				//INFO: a new marker based on the last clicked event's position.
+				//INFO: The new markers is added to the map.
+				//INFO: the bug was this line 39 was adding to the map and at line 50 we were also adding it to the cluster group.
+	      		//var marker = L.marker(e.latlng, { draggable: true }).addTo(map);
+	      		//INFO: This one is adding 100 markers.
+	      		for (var i = 0; i < 1; i++) {
+	      			//INFO: basically creates 100 markers.
+	      			//e.latlng
+	      			//INFO: this line creates the marker but does NOT add it to the map.
+					//var m = new L.Marker(getRandomLatLng(map));
+					var m = new L.Marker(e.latlng);
+					//Now each of the 100 markers are maintained as an array.
+					markersList.push(m);
+	      			//INFO: basically creates 100 markers and adds them ? as separate layers ?
+	      			//TODO: confirm by reading API.
+					markerClusterGroup.addLayer(m);
+				}
+				return false;
+			} 
+
+
+		//INFO: so basically every time when populate is clicked,
+		//a call back function mapClick is added to the map.
+		function populate() {
+			//INFO: on click of map, the callback function mapClick is called and the object e is passed.
+			//Object e has latlang variables.
+			map.on('click',mapClick);
+	    }  	
+		// function populate() {
+		// 	for (var i = 0; i < 100; i++) {
+		// 		var m = new L.Marker(getRandomLatLng(map));
+		// 		markersList.push(m);
+		// 		markerClusterGroup.addLayer(m);
+		// 	}
+		// 	return false;
+		// }
+		function populateRandomVector() {
+			for (var i = 0, latlngs = [], len = 20; i < len; i++) {
+				latlngs.push(getRandomLatLng(map));
+			}
+			var path = new L.Polyline(latlngs);
+			map.addLayer(path);
+		}
+		function getRandomLatLng(map) {
+			var bounds = map.getBounds(),
+				southWest = bounds.getSouthWest(),
+				northEast = bounds.getNorthEast(),
+				lngSpan = northEast.lng - southWest.lng,
+				latSpan = northEast.lat - southWest.lat;
+
+			return new L.LatLng(
+					southWest.lat + latSpan * Math.random(),
+					southWest.lng + lngSpan * Math.random());
+		}
+
+		markerClusterGroup.on('clusterclick', function (a) {
+			alert('cluster ' + a.layer.getAllChildMarkers().length);
+		});
+		markerClusterGroup.on('click', function (a) {
+			alert('marker ' + a.layer);
+		});
+
+		populate();
+		//INFO: The markerClusterGroup are then added to the map.
+		map.addLayer(markerClusterGroup);
+
+		L.DomUtil.get('populate').onclick = function () {
+			console.log('populate is clicked');
+			var bounds = map.getBounds(),
+			southWest = bounds.getSouthWest(),
+			northEast = bounds.getNorthEast(),
+			lngSpan = northEast.lng - southWest.lng,
+			latSpan = northEast.lat - southWest.lat;
+			var m = new L.Marker(new L.LatLng(
+					southWest.lat + latSpan * 0.5,
+					southWest.lng + lngSpan * 0.5));
+			markersList.push(m);
+			markerClusterGroup.addLayer(m);
+		};
+		L.DomUtil.get('remove').onclick = function () {
+			markerClusterGroup.removeLayer(markersList.pop());
+		};
+	</script>
+</body>
+</html>
