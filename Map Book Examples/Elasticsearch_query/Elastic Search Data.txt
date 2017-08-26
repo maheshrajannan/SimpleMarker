@@ -1,0 +1,155 @@
+{
+   "took": 37,
+   "timed_out": false,
+   "_shards": {
+      "total": 10,
+      "successful": 10,
+      "failed": 0
+   },
+   "hits": {
+      "total": 19,
+      "max_score": 1,
+      "hits": [
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3_fYVqQK_rOv7BGmZj",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Kamaraj alumini",
+               "coords": {
+                  "lat": 67.225,
+                  "lon": 54.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3boWhoVHmoYbrg0F6r",
+            "_score": 1,
+            "_source": {
+               "locationName": "kalasalingam college",
+               "groupName": "KIT alumini",
+               "coords": {
+                  "lat": 40.25,
+                  "lon": 102.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3brkg3VHmoYbrg0F62",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Mepco alumini",
+               "coords": {
+                  "lat": 47.245,
+                  "lon": 18.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3br67mVHmoYbrg0F65",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Kamaraj alumini",
+               "coords": {
+                  "lat": 67.245,
+                  "lon": 54.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3bvMwrVHmoYbrg0F69",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Kamaraj alumini",
+               "coords": {
+                  "lat": 67.22,
+                  "lon": 54.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3bvbl3VHmoYbrg0F6_",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Kamaraj alumini",
+               "coords": {
+                  "lat": 67.225,
+                  "lon": 54.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3bve4hVHmoYbrg0F7B",
+            "_score": 1,
+            "_source": {
+               "locationName": "Mycollege",
+               "groupName": "Kamaraj alumini",
+               "coords": {
+                  "lat": 67.225,
+                  "lon": 54.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3boaQQVHmoYbrg0F6s",
+            "_score": 1,
+            "_source": {
+               "locationName": "kalasalingam college",
+               "groupName": "KIT alumini",
+               "coords": {
+                  "lat": 40.25,
+                  "lon": 102.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3bobY4VHmoYbrg0F6t",
+            "_score": 1,
+            "_source": {
+               "locationName": "kalasalingam college",
+               "groupName": "KIT alumini",
+               "coords": {
+                  "lat": 40.25,
+                  "lon": 102.86
+               }
+            }
+         },
+         {
+            "_index": "mapbook",
+            "_type": "userlocation",
+            "_id": "AV3bohPzVHmoYbrg0F6u",
+            "_score": 1,
+            "_source": {
+               "locationName": "My college",
+               "groupName": "KIT alumini",
+               "coords": {
+                  "lat": 42.25,
+                  "lon": 102.86
+               }
+            }
+         }
+      ]
+   }
+}
