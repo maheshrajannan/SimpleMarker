@@ -72,6 +72,7 @@ post /sports/_bulk
 {"name":"Lewis", "birthdate":"1988-3-1", "sport":"Football", "rating": ["10", "10"], "location":"46.25,-68.55" }
 
 
+--INFO: This one returns count of all names, basically count of all records.
 POST /sports/athlete/_search
 {
    "size": 0,
@@ -84,6 +85,7 @@ POST /sports/athlete/_search
    }
 }
 
+--INFO: this one returns the count of unique sports say Hockey and Football.
 
 POST /sports/athlete/_search
 {
