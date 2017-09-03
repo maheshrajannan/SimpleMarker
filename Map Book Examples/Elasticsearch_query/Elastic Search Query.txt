@@ -86,3 +86,77 @@ GET _search
         }
     }
 } 
+
+
+/* Updated Query */
+-------------------
+PUT /mapbook2
+{
+   "mappings": {
+      "userlocation": {
+         "properties": {
+            "coords": {
+               "type": "geo_point"
+            },
+            "groupname": {
+               "type": "keyword"
+            },
+            "location": {
+               "type": "keyword"
+            }
+         }
+      }
+   }
+}
+
+POST /mapbook2/userlocation/_bulk?refresh
+{"index":{"_id":1}}
+{"coords": "52.374081,4.912350", "groupname": "Amsterdam", "location": "NEMO Science Museum"}
+{"index":{"_id":2}}
+{"coords": "52.369219,4.901618", "groupname": "Amsterdam", "location": "Museum Het Rembrandthuis"}
+{"index":{"_id":3}}
+{"coords": "52.371667,4.914722", "groupname": "Amsterdam", "location": "Nederlands Scheepvaartmuseum"}
+{"index":{"_id":4}}
+{"coords": "51.222900,4.405200", "groupname": "Antwerp", "location": "Letterenhuis"}
+{"index":{"_id":5}}
+{"coords": "48.861111,2.336389", "groupname": "Paris", "location": "Musée du Louvre"}
+{"index":{"_id":6}}
+{"coords": "48.860000,2.327000", "groupname": "Paris", "location": "Musée d'Orsay"}
+
+POST /mapbook2/userlocation
+{
+  "coords": "52.374081,4.912350", "groupname": "Amsterdam1", "location": "NEMO Science Museum"  
+}
+
+GET _search
+{
+    "size": 0,
+    "aggs":{
+        "distinct":{
+            "terms":{
+              "field":"groupname"
+            }
+        }    
+    }
+}
+
+GET /mapbook2/userlocation/_search 
+{
+    "size": 0, 
+    "query": {
+        "bool" : {
+            "must" : {
+                "match_all" : {}
+            },
+           "filter": {
+                "geo_distance": {
+                    "distance": 100,
+                    "coords":{
+                        "lat":52.374081,
+                        "lon":4.912350
+                    }    
+                }
+            } 
+        }
+    }    
+}
