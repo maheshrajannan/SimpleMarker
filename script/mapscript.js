@@ -13,6 +13,14 @@ function addMapPicker() {
       //INFO:removed zoom options, the L control automatically finds appropriate zoom.
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
+  console.log(L.Routing);
+
+//   var control = L.Routing.control({
+//     waypoints: [
+//         L.latLng(57.74, 11.94),
+//         L.latLng(57.6792, 11.949)
+//     ]
+// }).addTo(mymap);
 //User Location
 //INFO: https://github.com/domoritz/leaflet-locatecontrol
 var lc = L.control.locate({
@@ -22,6 +30,7 @@ var lc = L.control.locate({
     strings: {
         title: "Show me where I am, yo!",
     }
+
 }).addTo(mymap);
 // console.log(lc);
 // console.log($(lc)[0]);
@@ -50,7 +59,7 @@ setTimeout(() => {
   draggable: true
   }).addTo(mymap);
   */
-
+var markers = []; 
   /* Car Marker */  
   var carIcon = L.icon(
       { 
@@ -79,6 +88,7 @@ setTimeout(() => {
       return false;
     },
   
+
   /* Onclick update coordinates */
 
   //TODO: declare a function say mapClick and put the function here DONE.
@@ -93,6 +103,8 @@ setTimeout(() => {
       mapActionListener.updateMarker(marker,e.latlng.lat, e.latlng.lng);
       //"this" is not bound to mapActionListener, it points to some map API's class.
       marker.on('dragend', mapActionListener.markerDragEnd);
+      markers.push({lat:e.latlng.lat, lng:e.latlng.lng });
+      console.log(markers);
     },
   
 
